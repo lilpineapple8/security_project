@@ -1,0 +1,171 @@
+{% extends "admin_base.html" %}
+{%block title%}Library Loan System - Create User {% endblock %}
+{% block content %}
+{% from "includes/formHelper.html" import render_field %}
+
+<style>
+    <style>
+    body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    height: 100vh;
+    font-family: sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.loginBox {
+    width: 500px;
+    padding: 50px;
+    margin-top:50px;
+    margin-right: auto;
+    margin-left:auto;
+    background: #d40d3e;
+    border-radius: 25px;
+    text-align: center;
+    transition: 0.25s;
+
+
+}
+
+.user {
+    margin: auto;
+    display: block;
+    margin-bottom: 20px
+}
+
+h3 {
+    margin: 0;
+    padding: 0 0 20px;
+    color: white;
+    text-align: center
+}
+
+.loginBox input {
+    width: 100%;
+    margin-bottom: 20px
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="password"],
+.loginBox input[type="email"] {
+    border: 2px solid white !important;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    border-radius: 24px;
+}
+
+.loginBox input[type="text"]:hover,
+.loginBox input[type="password"]:hover,
+.loginBox input[type="email"]:hover,  {
+    color: white;
+    border: 1px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 255, 0, .3), 0 0 10px rgba(0, 255, 0, .2), 0 0 15px rgba(0, 255, 0, .1), 0 2px 0 black
+}
+
+.loginBox input[type="text"]:focus,
+.loginBox input[type="password"]:focus,
+.loginBox input[type="email"]:focus  {
+    border: 2px solid #fff
+}
+
+.inputBox {
+    position: relative
+}
+
+.inputBox span {
+    position: absolute;
+    top: 10px;
+    color: white
+}
+
+.loginBox input[type="submit"] {
+    border: 2px solid white !important;
+    outline:none;
+    height: 40px;
+    font-size: 16px;
+    background: none;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer
+}
+
+.loginBox a {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    display: block
+}
+
+a:hover {
+    color: #00ffff
+}
+
+p {
+    color: white;
+}
+.form-group {
+    color:white;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+</style>
+
+<form method="POST" enctype=multipart/form-data action="">
+    <div class="loginBox">
+    <h3>Create User</h3>
+    <form method="post">
+        <div class="form-group">
+            {{render_field(form.username,class="form-controls")}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.email,class="form-controls")}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.phone,class="form-controls")}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.password,class="form-controls")}}
+        </div>
+         <div id="prof">
+        <div class="form-group">
+            {{render_field(form.confirm,class="form-controls")}}
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+         </div>
+    </form>
+</div>
+</form>
+  <!-- Footer -->
+<div id="page-container">
+   <div id="content-wrap">
+     <!-- all other page content -->
+   </div>
+   <footer id="footer" class="py-2 bg-dark">
+       <div class="container">
+        <p class="m-0 text-white">Copyright &copy; Your Website 2021</p>
+       </div>
+   </footer>
+ </div>
+{% endblock %}
+

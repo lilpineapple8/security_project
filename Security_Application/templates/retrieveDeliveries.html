@@ -1,0 +1,190 @@
+{% extends "admin_base.html" %}
+{% block title %}EMerchant - Retrieve Deliveries{% endblock %}
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  width: 49.80%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myInput2 {
+  width: 49.80%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+
+</style>
+
+{% block content %}
+<h1 class="display-4">Retrieve Deliveries</h1>
+
+<style>
+h1{
+  font-size: 30px;
+  color: black;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+table{
+  width:100%;
+  table-layout: fixed;
+  border:2px solid black;
+  margin-top:30px;
+}
+
+.tbl-content{
+  height:300px;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  color: black;
+  text-transform: uppercase;
+  font-family:Tahoma, Verdana, Segoe, sans-serif;
+  font-size:18px;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 16px;
+  color: black;
+  font-family:Tahoma, Verdana, Segoe, sans-serif;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+
+}
+
+
+
+section{
+  margin: 50px;
+}
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+.space{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+</style>
+
+<div class="space">
+  {% if count == 0 %}
+  <p>There are no deliveries.</p>
+  {% elif count == 1 %}
+  <p>There is 1 delivery.</p>
+  {% else %}
+  <p>There are {{ count }} deliveries.</p>
+  {% endif %}
+</div>
+<div class="space">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search By Order Id" >
+</div>
+<div class="container-fluid">
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Address</th>
+        <th>Delivery Status</th>
+        <th>Remark</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for delivery in delivery_list %}
+      <tr>
+        <td>{{ delivery.get_payment_id() }}</td>
+        <td>{{ delivery.get_address() }}</td>
+        <td>{{ delivery.get_delivery_status() }}</td>
+        <td>{{ delivery.get_remark() }}</td>
+
+        <td><a href="/updateDelivery/{{delivery.get_payment_id()}}" class="btn btn-warning shows">Update</a></td>
+        <td>
+          <form action="{{url_for('delete_delivery', id = delivery.get_payment_id())}}" method="POST">
+            <input type="submit" value="Delete" class="btn btn-danger shows" onclick="return confirm('Are you sure you want to delete {{delivery.get_payment_id()}}?');">
+
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <script>
+    function myFunction() {
+  // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+</script>
+  </table>
+</div>
+
+
+<div id="page-container">
+   <div id="content-wrap">
+     <!-- all other page content -->
+   </div>
+   <footer id="footer" class="py-2 bg-dark">
+       <div class="container">
+        <p class="m-0 text-white">Copyright &copy; Your Website 2021</p>
+       </div>
+   </footer>
+ </div>
+{% endblock %}

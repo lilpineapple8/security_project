@@ -1,0 +1,45 @@
+<nav id="navbar" class="navbar navbar-expand-sm navbar-light" style="background-color: #d40d3e">
+  <style>
+    #navbar{
+    background-color: #a483f2;
+    }
+  </style>
+<div class="navbar-collapse collapse w-50 order-1 order-sm-0 dual-collapse2">
+  <!-- Brand -->
+  <a class="navbar-brand" style="color:white" href="/">E-Merchant</a>
+{% if session['Username'] == 'Admin' %}
+  <!-- Links -->
+  <ul class="navbar-nav" id="leftSide">
+    <li class="nav-item">
+      <a class="nav-link" style="color:white" href="/">Home</a>
+    </li>
+<!-- Dropdown -->
+    <li class="nav-item">
+      <a class="nav-link" id="product" style="color:white" href="/retrieveProducts">Products</a>
+    </li>
+    <li class="nav-item">
+      <a id="staffPower2" style="color:white" class="nav-link" href="/retrieveDeliveries">Deliveries Details</a>
+    </li>
+  </ul>
+{% endif %}
+</div>
+
+  <ul class="navbar-nav mr-auto test-center" id="rightSide">
+  {% if session['Username'] is not defined %}
+   <li class="nav-item">
+    <a class="nav-link" style="color:white" id="login" href="/login">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" style="color:white" id="register" href="/register">Register</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" style="color:white" id="cart" href="/">Cart</a>
+  </li>
+  {% endif %}
+  {% if session['Username'] is defined %}
+  <li class="nav-item">
+    <a class="nav-link" style="color:white" id="logout" href="/logout">Logout</a>
+  </li>
+  {% endif %}
+  </ul>
+</nav>
